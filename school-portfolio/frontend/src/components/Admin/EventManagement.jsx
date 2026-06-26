@@ -1,0 +1,1 @@
+// CRUD for events with date picker, image upload, category

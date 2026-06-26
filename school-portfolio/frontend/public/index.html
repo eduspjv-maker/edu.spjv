@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Sutarpara jatiya vidyalaya  | Excellence in Education</title>
+  <!-- Tailwind CSS + Font Awesome + Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Lightbox (simple) and Slick Slider -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body.dark { background-color: #121212; color: #f0f0f0; }
+    body.dark .bg-white { background-color: #1e1e1e !important; }
+    body.dark .text-gray-600, body.dark .text-gray-500 { color: #ccc !important; }
+    body.dark .border-gray-200 { border-color: #333 !important; }
+    .slick-dots li button:before { font-size: 12px; color: #4DA6FF; }
+    .parallax { background-attachment: fixed; background-size: cover; background-position: center; }
+    .glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border-radius: 1rem; }
+    .transition-smooth { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
+    .masonry { column-count: 3; column-gap: 1.5rem; }
+    .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+    @media (max-width: 768px) { .masonry { column-count: 2; } }
+    @media (max-width: 480px) { .masonry { column-count: 1; } }
+    .admin-sidebar { transition: transform 0.3s ease; }
+    @media (max-width: 1024px) { .admin-sidebar { transform: translateX(-100%); position: fixed; z-index: 60; } .admin-sidebar.open { transform: translateX(0); } }
+    
+    /* --- FIXED: Admin Dashboard Text Colors --- */
+    /* Sidebar links - light mode */
+    .admin-sidebar .admin-nav {
+      color: #1f2937; /* gray-800 */
+    }
+    body.dark .admin-sidebar .admin-nav {
+      color: #e5e7eb; /* gray-200 */
+    }
+    .admin-sidebar .admin-nav:hover {
+      background-color: #f3f4f6;
+    }
+    body.dark .admin-sidebar .admin-nav:hover {
+      background-color: #374151;
+    }
+    /* Admin content area text */
+    #adminContent h2, #adminContent h3, #adminContent p, #adminContent label, #adminContent td, #adminContent th, #adminContent div:not(.bg-blue-100):not(.bg-green-100):not(.bg-purple-100):not(.bg-orange-100) {
+      color: #111827; /* default dark text */
+    }
+    body.dark #adminContent h2, body.dark #adminContent h3, body.dark #adminContent p, body.dark #adminContent label, body.dark #adminContent td, body.dark #adminContent th, body.dark #adminContent div:not(.bg-blue-100):not(.bg-green-100):not(.bg-purple-100):not(.bg-orange-100) {
+      color: #f9fafb; /* light text in dark mode */
+    }
+    /* Keep colored stats boxes readable */
+    #adminContent .bg-blue-100, #adminContent .bg-green-100, #adminContent .bg-purple-100, #adminContent .bg-orange-100 {
+      color: #1f2937;
+    }
+    body.dark #adminContent .bg-blue-100, body.dark #adminContent .bg-green-100, body.dark #adminContent .bg-purple-100, body.dark #adminContent .bg-orange-100 {
+      color: #1f2937; /* keep dark text on colored backgrounds for contrast */
+    }
+    /* Table borders and buttons */
+    #adminContent table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    #adminContent th, #adminContent td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    body.dark #adminContent th, body.dark #adminContent td {
+      border-color: #4b5563;
+    }
+    /* Form inputs inside admin panel */
+    #adminContent input, #adminContent select, #adminContent textarea {
+      background-color: #ffffff;
+      color: #111827;
+      border: 1px solid #d1d5db;
+    }
+    body.dark #adminContent input, body.dark #adminContent select, body.dark #adminContent textarea {
+      background-color: #374151;
+      color: #f3f4f6;
+      border-color: #4b5563;
+    }
+    /* Buttons inside admin */
+    #adminContent button {
+      transition: all 0.2s;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-darkBg dark:text-white transition-colors duration-300">
+
+  <!-- ==================== NAVIGATION (unchanged) ==================== -->
+  <nav id="navbar" class="fixed w-full z-50 bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-md shadow-md transition-all duration-300">
+    <div class="container mx-auto px-5 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="https://placehold.co/400x400/4DA6FF/white?text=E" alt="Logo" class="h-10 w-10 rounded-full">
+        <span class="font-bold text-xl text-[#003366] dark:text-[#4DA6FF]">Sutarpara jatiya vidyalaya</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#home" class="nav-link hover:text-[#4DA6FF] transition">Home</a>
+        <a href="#about" class="nav-link hover:text-[#4DA6FF] transition">About Us</a>
+        <a href="#academics" class="nav-link hover:text-[#4DA6FF] transition">Academics</a>
+        <a href="#pride" class="nav-link hover:text-[#4DA6FF] transition">Achievements</a>
+        <a href="#gallery" class="nav-link hover:text-[#4DA6FF] transition">Alumni Gallery</a>
+        <a href="#teachers" class="nav-link hover:text-[#4DA6FF] transition">Teachers</a>
+        <a href="#events" class="nav-link hover:text-[#4DA6FF] transition">Events & News</a>
+        <a href="#contact" class="nav-link hover:text-[#4DA6FF] transition">Contact</a>
+        <button id="darkModeToggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i></button>
+        <button id="adminBtn" class="bg-[#4DA6FF] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#3a8bdd]">Admin</button>
+      </div>
+      <button id="mobileMenuBtn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 px-5 py-4 flex flex-col gap-3 shadow-lg">
+      <a href="#home" class="py-2">Home</a><a href="#about">About</a><a href="#academics">Academics</a><a href="#pride">Achievements</a>
+      <a href="#gallery">Gallery</a><a href="#teachers">Teachers</a><a href="#events">Events</a><a href="#contact">Contact</a>
+      <button id="mobileDarkToggle" class="text-left py-2">Dark/Light</button>
+      <button id="mobileAdminBtn" class="bg-[#4DA6FF] text-white py-2 rounded-lg">Admin Dashboard</button>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SLIDER (unchanged) ==================== -->
+  <section id="home" class="pt-16">
+    <div class="hero-slider relative">
+      <div class="h-[90vh] bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('https://picsum.photos/id/20/1600/900');"><div class="flex items-center justify-center h-full text-center text-white"><div><h1 class="text-5xl md:text-7xl font-bold">Welcome to Elite School</h1><p class="text-xl mt-4">Excellence in Education Since 1999</p><a href="#about" class="inline-block mt-8 bg-[#4DA6FF] px-8 py-3 rounded-full">Learn More</a></div></div></div>
+      <div class="h-[90vh] bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('https://picsum.photos/id/1/1600/900');"><div class="flex items-center justify-center h-full text-center text-white"><div><h1 class="text-5xl md:text-7xl font-bold">Innovative Learning</h1><p class="text-xl mt-4">Empowering students for the future</p><a href="#academics" class="inline-block mt-8 bg-[#4DA6FF] px-8 py-3 rounded-full">Explore Academics</a></div></div></div>
+      <div class="h-[90vh] bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('https://picsum.photos/id/30/1600/900');"><div class="flex items-center justify-center h-full text-center text-white"><div><h1 class="text-5xl md:text-7xl font-bold">Admissions Open 2025</h1><p class="text-xl mt-4">Join our family of excellence</p><a href="#contact" class="inline-block mt-8 bg-[#4DA6FF] px-8 py-3 rounded-full">Contact Us</a></div></div></div>
+    </div>
+  </section>
+
+  <!-- ==================== STATISTICS COUNTERS (unchanged) ==================== -->
+  <section class="py-12 bg-gradient-to-r from-[#4DA6FF] to-[#003366] text-white">
+    <div class="container mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div><i class="fas fa-users text-4xl"></i><div class="text-3xl font-bold mt-2 counter" data-target="2450">0</div><p>Students</p></div>
+      <div><i class="fas fa-chalkboard-teacher text-4xl"></i><div class="text-3xl font-bold mt-2 counter" data-target="128">0</div><p>Teachers</p></div>
+      <div><i class="fas fa-trophy text-4xl"></i><div class="text-3xl font-bold mt-2 counter" data-target="26">0</div><p>Years of Excellence</p></div>
+      <div><i class="fas fa-graduation-cap text-4xl"></i><div class="text-3xl font-bold mt-2 counter" data-target="4850">0</div><p>Alumni Placed</p></div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT SECTION (unchanged) ==================== -->
+  <section id="about" class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-5">
+      <h2 class="text-4xl font-bold text-center text-[#003366] dark:text-white">About Our School</h2>
+      <p class="text-center text-gray-500 mb-12">Discover our journey of excellence</p>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div><h3 class="text-2xl font-semibold">History & Mission</h3><p class="mt-3 text-gray-600 dark:text-gray-300">Founded in 2004, Sutarpara jatiya vidyalaya has been a beacon of quality education, nurturing young minds and shaping future leaders. Our mission is to provide holistic education that fosters academic excellence, character development, and lifelong learning.</p><h3 class="text-2xl font-semibold mt-6">Vision</h3><p class="mt-3 text-gray-600 dark:text-gray-300">To be a global leader in education, empowering students to become compassionate, innovative, and responsible citizens.</p></div>
+        <div class="bg-gray-100 dark:bg-gray-800 p-8 rounded-2xl shadow"><div class="flex gap-4 items-center"><img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-20 h-20 rounded-full object-cover"><div><h4 class="font-bold text-xl">Alom Shah</h4><p class="text-[#4DA6FF]">Principal</p></div></div><p class="italic mt-4 text-gray-600 dark:text-gray-300">"Education is not just about acquiring knowledge; it is about building character, fostering creativity, and developing critical thinking. At Elite School, every child discovers their unique potential."</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ACADEMICS (unchanged) ==================== -->
+  <section id="academics" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-5">
+      <h2 class="text-4xl font-bold text-center text-[#003366] dark:text-white">Academics</h2>
+      <div class="grid md:grid-cols-4 gap-6 mt-10">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow hover:shadow-xl transition card-hover"><h3 class="text-xl font-bold">Primary</h3><p class="mt-2 text-gray-500">Grades 1-5 | Foundation years with interactive learning.</p></div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow hover:shadow-xl transition card-hover"><h3 class="text-xl font-bold">Middle School</h3><p class="mt-2 text-gray-500">Grades 6-8 | skill building.</p></div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow hover:shadow-xl transition card-hover"><h3 class="text-xl font-bold">High School</h3><p class="mt-2 text-gray-500">Grades 9-10 | NCERT curriculum with elective subjects.</p></div>
+      </div>
+      <div class="mt-10 bg-white dark:bg-gray-900 p-6 rounded-xl shadow"><h3 class="text-xl font-bold">Examination System</h3><p>Periodic tests, assignments, and term-end examinations following NCERT pattern.</p><button class="mt-3 text-[#4DA6FF] font-semibold">Download Academic Calendar →</button></div>
+    </div>
+  </section>
+
+  <!-- ==================== OUR PRIDE (unchanged) ==================== -->
+  <section id="pride" class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-5">
+      <h2 class="text-4xl font-bold text-center text-[#003366] dark:text-white">Our Pride</h2>
+      <div class="flex flex-wrap justify-center gap-3 mt-6 mb-10">
+        <button class="pride-filter-btn active px-4 py-2 rounded-full bg-[#4DA6FF] text-white" data-year="all">All Years</button>
+        <button class="pride-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-year="2025">2025</button>
+        <button class="pride-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-year="2024">2024</button>
+        <button class="pride-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-year="2023">2023</button>
+        <input type="text" id="prideSearch" placeholder="Search student..." class="border rounded-full px-4 py-2 dark:bg-gray-800">
+      </div>
+      <div id="prideGrid" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+      <div id="pridePagination" class="flex justify-center mt-8 gap-2"></div>
+    </div>
+  </section>
+
+  <!-- ==================== TEACHERS & STAFF (unchanged) ==================== -->
+  <section id="teachers" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-5">
+      <h2 class="text-4xl font-bold text-center text-[#003366] dark:text-white">Teachers & Staff</h2>
+      <div class="flex justify-center gap-3 mt-6 mb-8">
+        <button class="teacher-cat-btn active bg-[#4DA6FF] text-white px-4 py-2 rounded-full" data-cat="all">All</button>
+        <button class="teacher-cat-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="teacher">Teachers</button>
+        <button class="teacher-cat-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="office">Office Staff</button>
+        <button class="teacher-cat-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="management">Management</button>
+      </div>
+      <div id="teachersGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- ==================== GALLERY (unchanged) ==================== -->
+  <section id="gallery" class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-5">
+      <h2 class="text-4xl font-bold text-center text-[#003366] dark:text-white">Alumni Gallery</h2>
+      <div class="flex flex-wrap justify-center gap-3 mt-6 mb-10">
+        <button class="gallery-filter-btn active bg-[#4DA6FF] text-white px-4 py-2 rounded-full" data-cat="all">All</button>
+        <button class="gallery-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="alumni">Alumni</button>
+        <button class="gallery-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="activities">Activities</button>
+        <button class="gallery-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="sports">Sports</button>
+        <button class="gallery-filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700" data-cat="cultural">Cultural</button>
+      </div>
+      <div id="galleryMasonry" class="masonry"></div>
+    </div>
+  </section>
+
+  <!-- ==================== EVENTS & NEWS (unchanged) ==================== -->
+  <section id="events" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-5">
+      <h2 class="text-4xl font-bold text-center text-[#003366] dark:text-white">Events & News</h2>
+      <div class="grid md:grid-cols-2 gap-8 mt-10">
+        <div><h3 class="text-2xl font-semibold mb-4">📰 Latest News</h3><div id="newsList" class="space-y-4"></div></div>
+        <div><h3 class="text-2xl font-semibold mb-4">📅 Upcoming Events</h3><div id="eventsList" class="space-y-4"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT & MAP (unchanged) ==================== -->
+  <section id="contact" class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-5 grid md:grid-cols-2 gap-12">
+      <div><h2 class="text-3xl font-bold">Get in Touch</h2><div class="mt-6 space-y-4"><p><i class="fas fa-map-marker-alt text-[#4DA6FF] w-6"></i> Garomari,matia, Assam - 783125</p><p><i class="fas fa-phone-alt text-[#4DA6FF] w-6"></i> +91 9864963010</p><p><i class="fas fa-envelope text-[#4DA6FF] w-6"></i> edu.spjv@gmail.com</p><div class="flex gap-4 mt-4"><a href="#"><i class="fab fa-facebook text-2xl text-gray-600"></i></a><a href="#"><i class="fab fa-instagram text-2xl text-gray-600"></i></a><a href="#"><i class="fab fa-youtube text-2xl text-gray-600"></i></a><a href="#"><i class="fab fa-whatsapp text-2xl text-gray-600"></i></a></div></div></div>
+      <div><form id="contactForm"><h3 class="text-xl font-semibold">Send Message</h3><div class="mt-4 space-y-3"><input type="text" placeholder="Name" id="contactName" class="w-full p-3 border rounded-lg dark:bg-gray-800" required><input type="email" placeholder="Email" id="contactEmail" class="w-full p-3 border rounded-lg dark:bg-gray-800" required><input type="text" placeholder="Subject" id="contactSubject" class="w-full p-3 border rounded-lg dark:bg-gray-800"><textarea placeholder="Message" id="contactMsg" rows="3" class="w-full p-3 border rounded-lg dark:bg-gray-800" required></textarea><button type="submit" class="bg-[#4DA6FF] text-white px-6 py-2 rounded-lg">Send Message</button></div></form></div>
+    </div>
+    <div class="container mx-auto px-5 mt-12"><iframe width="100%" height="300" style="border:0; border-radius:1rem;" loading="lazy" src="https://maps.app.goo.gl/nb4A6xFaLPjuXyFz8"></iframe></div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-gray-900 text-white py-8 text-center"><p>&copy; 2026 sutarpara jatiya vidyalaya. All rights reserved.</p></footer>
+
+  <!-- ==================== ADMIN DASHBOARD (updated text colors) ==================== -->
+  <div id="adminOverlay" class="fixed inset-0 bg-black/70 z-50 hidden transition-all overflow-auto">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <div id="adminSidebar" class="admin-sidebar w-72 bg-white dark:bg-gray-900 shadow-2xl p-5 h-full overflow-y-auto">
+        <div class="flex justify-between items-center mb-6"><h2 class="text-2xl font-bold text-[#4DA6FF]">Admin Panel</h2><button id="closeAdminSidebar"><i class="fas fa-times text-xl text-gray-700 dark:text-gray-300"></i></button></div>
+        <nav class="space-y-2">
+          <a href="#" data-admin-section="dashboard" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-chart-line w-6"></i> Dashboard</a>
+          <a href="#" data-admin-section="prideManage" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-star w-6"></i> Our Pride</a>
+          <a href="#" data-admin-section="teacherManage" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-chalkboard-user w-6"></i> Teachers</a>
+          <a href="#" data-admin-section="galleryManage" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-images w-6"></i> Gallery</a>
+          <a href="#" data-admin-section="eventManage" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-calendar-alt w-6"></i> Events</a>
+          <a href="#" data-admin-section="messages" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-envelope w-6"></i> Messages</a>
+          <a href="#" data-admin-section="schoolInfo" class="admin-nav block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"><i class="fas fa-school w-6"></i> School Info</a>
+          <button id="adminLogoutBtn" class="w-full text-left p-3 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition"><i class="fas fa-sign-out-alt w-6"></i> Logout</button>
+        </nav>
+      </div>
+      <!-- Main Content -->
+      <div class="flex-1 p-6 bg-gray-100 dark:bg-gray-800">
+        <button id="mobileAdminMenuBtn" class="lg:hidden bg-[#4DA6FF] text-white px-3 py-2 rounded mb-4"><i class="fas fa-bars"></i> Menu</button>
+        <div id="adminContent" class="bg-white dark:bg-gray-900 rounded-xl shadow p-6"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------------ DATA (localStorage demo) ------------------------------
+    let prideStudents = JSON.parse(localStorage.getItem('prideStudents')) || [
+      { id: 1, name: "Rahul Sharma", marks: 95, year: 2025, photo: "https://randomuser.me/api/portraits/men/1.jpg", position: "IIT Bombay" },
+      { id: 2, name: "Priya Mehta", marks: 98, year: 2025, photo: "https://randomuser.me/api/portraits/women/2.jpg", position: "AIIMS Delhi" },
+      { id: 3, name: "Amit Kumar", marks: 92, year: 2024, photo: "https://randomuser.me/api/portraits/men/3.jpg", position: "Google" },
+      { id: 4, name: "Neha Singh", marks: 96, year: 2024, photo: "https://randomuser.me/api/portraits/women/4.jpg" },
+      { id: 5, name: "Rohan Das", marks: 94, year: 2023, photo: "https://randomuser.me/api/portraits/men/5.jpg" }
+    ];
+    let teachers = JSON.parse(localStorage.getItem('teachers')) || [
+      { id: 1, name: "Mrs. Sunita Sharma", designation: "Mathematics Teacher", qualification: "M.Sc., B.Ed", category: "teacher", photo: "https://randomuser.me/api/portraits/women/10.jpg", subject: "Mathematics" },
+      { id: 2, name: "Mr. Rajesh Khanna", designation: "Physics HOD", qualification: "M.Phil", category: "teacher", photo: "https://randomuser.me/api/portraits/men/11.jpg", subject: "Physics" },
+      { id: 3, name: "Ms. Anjali Verma", designation: "Office Manager", category: "office", photo: "https://randomuser.me/api/portraits/women/12.jpg" },
+      { id: 4, name: "Dr. Vikram Singh", designation: "Chairman", category: "management", photo: "https://randomuser.me/api/portraits/men/13.jpg" }
+    ];
+    let galleryImages = JSON.parse(localStorage.getItem('gallery')) || [
+      { id: 1, url: "https://picsum.photos/id/101/400/300", category: "alumni", title: "Alumni Meet" },
+      { id: 2, url: "https://picsum.photos/id/26/400/300", category: "activities", title: "Science Fair" },
+      { id: 3, url: "https://picsum.photos/id/29/400/300", category: "sports", title: "Sports Day" },
+      { id: 4, url: "https://picsum.photos/id/30/400/300", category: "cultural", title: "Annual Day" },
+      { id: 5, url: "https://picsum.photos/id/96/400/300", category: "alumni", title: "Alumni Party" }
+    ];
+    let eventsList = JSON.parse(localStorage.getItem('events')) || [
+      { id: 1, title: "Annual Sports Meet", date: "2025-03-15", description: "Inter-school championship", category: "sports" },
+      { id: 2, title: "Parent-Teacher Meeting", date: "2025-02-28", description: "Discuss student progress" }
+    ];
+    let contactMessages = JSON.parse(localStorage.getItem('contactMsgs')) || [];
+    let schoolInfo = JSON.parse(localStorage.getItem('schoolInfo')) || { name: "Elite International School", motto: "Excellence in Education" };
+    let currentAdmin = localStorage.getItem('adminLogged') === 'true';
+
+    // Helper: render functions (unchanged logic)
+    function renderPride(filterYear = 'all', search = '') {
+      let filtered = prideStudents.filter(s => (filterYear === 'all' || s.year == filterYear) && s.name.toLowerCase().includes(search.toLowerCase()));
+      const pageSize = 6; let page = window.pridePage || 1;
+      let paginated = filtered.slice((page-1)*pageSize, page*pageSize);
+      document.getElementById('prideGrid').innerHTML = paginated.map(s => `<div class="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden card-hover"><img src="${s.photo}" class="h-48 w-full object-cover"><div class="p-4"><h3 class="font-bold">${s.name}</h3><p>Marks: ${s.marks}% | Year: ${s.year}</p><p class="text-sm text-gray-500">${s.position || 'Achiever'}</p></div></div>`).join('');
+      let totalPages = Math.ceil(filtered.length/pageSize);
+      document.getElementById('pridePagination').innerHTML = Array.from({length:totalPages},(_,i)=>`<button class="px-3 py-1 rounded ${page===i+1?'bg-[#4DA6FF] text-white':'bg-gray-200'} pride-page" data-page="${i+1}">${i+1}</button>`).join('');
+      document.querySelectorAll('.pride-page').forEach(btn => btn.onclick = (e)=>{ window.pridePage = parseInt(e.target.dataset.page); renderPride(filterYear, search); });
+    }
+    function renderTeachers(cat='all'){ let filtered = teachers.filter(t=>cat==='all'||t.category===cat); document.getElementById('teachersGrid').innerHTML=filtered.map(t=>`<div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4 text-center"><img src="${t.photo}" class="w-28 h-28 rounded-full mx-auto object-cover"><h3 class="font-bold mt-3">${t.name}</h3><p class="text-[#4DA6FF]">${t.designation}</p><p>${t.subject?t.subject:''} ${t.qualification?t.qualification:''}</p></div>`).join(''); }
+    function renderGallery(cat='all'){ let filtered = galleryImages.filter(i=>cat==='all'||i.category===cat); document.getElementById('galleryMasonry').innerHTML = filtered.map(i=>`<div class="masonry-item cursor-pointer" onclick="openLightbox('${i.url}')"><img src="${i.url}" class="rounded-xl shadow hover:scale-105 transition" loading="lazy"></div>`).join(''); }
+    function renderEventsNews(){ document.getElementById('newsList').innerHTML = eventsList.slice(0,3).map(e=>`<div class="bg-white dark:bg-gray-800 p-3 rounded shadow"><h4 class="font-bold">${e.title}</h4><p class="text-sm">${e.date} - ${e.description}</p></div>`).join(''); document.getElementById('eventsList').innerHTML = eventsList.filter(e=>new Date(e.date)>new Date()).map(e=>`<div class="bg-white dark:bg-gray-800 p-3 rounded shadow border-l-4 border-[#4DA6FF]"><h4 class="font-bold">${e.title}</h4><p>${e.date}</p></div>`).join(''); }
+    function openLightbox(url){ let modal=document.createElement('div'); modal.className='fixed inset-0 bg-black/90 z-[70] flex items-center justify-center'; modal.onclick=()=>modal.remove(); modal.innerHTML=`<img src="${url}" class="max-w-[90vw] max-h-[90vh] rounded-xl">`; document.body.appendChild(modal); }
+
+    // Admin content rendering (simplified CRUD)
+    function renderAdminDashboard(){ document.getElementById('adminContent').innerHTML=`<h2 class="text-2xl font-bold">Dashboard</h2><div class="grid grid-cols-2 gap-4 mt-6"><div class="bg-blue-100 p-4 rounded">Students: ${prideStudents.length}</div><div class="bg-green-100 p-4 rounded">Teachers: ${teachers.length}</div><div class="bg-purple-100 p-4 rounded">Gallery: ${galleryImages.length}</div><div class="bg-orange-100 p-4 rounded">Messages: ${contactMessages.length}</div></div>`; }
+    function renderPrideManage(){ let html=`<h2 class="text-2xl font-bold">Manage Our Pride</h2><button class="bg-green-500 text-white px-4 py-2 rounded my-4" onclick="addPrideStudent()">+ Add Student</button><table class="w-full mt-4 border"><thead><tr><th>Photo</th><th>Name</th><th>Year</th><th>Marks</th><th>Actions</th></tr></thead><tbody>${prideStudents.map(s=>`<tr><td><img src="${s.photo}" class="w-10 h-10 rounded-full"></td><td>${s.name}</td><td>${s.year}</td><td>${s.marks}%</td><td><button class="text-blue-600" onclick="editPride(${s.id})">Edit</button> <button class="text-red-600" onclick="deletePride(${s.id})">Del</button></td></tr>`).join('')}</tbody></table>`; document.getElementById('adminContent').innerHTML=html; }
+    window.addPrideStudent = ()=>{ let name=prompt("Name"); let year=prompt("Year"); let marks=prompt("Marks"); if(name) { let newId=Date.now(); prideStudents.push({id:newId,name,year:parseInt(year),marks:parseInt(marks),photo:"https://randomuser.me/api/portraits/men/99.jpg"}); localStorage.setItem('prideStudents',JSON.stringify(prideStudents)); renderPrideManage(); renderPride(); } };
+    window.deletePride=(id)=>{ prideStudents=prideStudents.filter(s=>s.id!=id); localStorage.setItem('prideStudents',JSON.stringify(prideStudents)); renderPrideManage(); renderPride(); };
+    window.editPride=(id)=>{ let s=prideStudents.find(s=>s.id==id); let newName=prompt("Name",s.name); if(newName) { s.name=newName; localStorage.setItem('prideStudents',JSON.stringify(prideStudents)); renderPrideManage(); renderPride(); } };
+    function renderTeacherManage(){ let html=`<h2 class="text-2xl font-bold">Manage Teachers</h2><button class="bg-green-500 text-white px-4 py-2 my-2" onclick="addTeacher()">+ Add Teacher</button><table class="w-full border"><thead><tr><th>Name</th><th>Designation</th><th>Action</th></tr></thead><tbody>${teachers.map(t=>`<tr><td>${t.name}</td><td>${t.designation}</td><td><button onclick="deleteTeacher(${t.id})" class="text-red-600">Delete</button></td></tr>`).join('')}</tbody></table>`; document.getElementById('adminContent').innerHTML=html; }
+    window.addTeacher=()=>{ let name=prompt("Name"); if(name){ teachers.push({id:Date.now(),name,designation:"New Staff",category:"teacher",photo:"https://randomuser.me/api/portraits/men/1.jpg"}); localStorage.setItem('teachers',JSON.stringify(teachers)); renderTeacherManage(); renderTeachers(); } };
+    window.deleteTeacher=(id)=>{ teachers=teachers.filter(t=>t.id!=id); localStorage.setItem('teachers',JSON.stringify(teachers)); renderTeacherManage(); renderTeachers(); };
+    function renderGalleryManage(){ let html=`<h2 class="text-2xl font-bold">Gallery Management</h2><div class="mb-4"><input type="text" id="newCat" placeholder="Category (alumni/activities/sports/cultural)" class="border p-2 mr-2"><input type="text" id="imgUrl" placeholder="Image URL" class="border p-2 mr-2"><button onclick="addGalleryImage()" class="bg-blue-500 text-white p-2 rounded">Add</button></div><div class="grid grid-cols-4 gap-2 mt-4">${galleryImages.map(g=>`<div><img src="${g.url}" class="h-24 w-full object-cover"><button onclick="deleteGallery(${g.id})" class="text-red-600 text-sm mt-1">X</button></div>`).join('')}</div>`; document.getElementById('adminContent').innerHTML=html; }
+    window.addGalleryImage=()=>{ let url=document.getElementById('imgUrl').value; let cat=document.getElementById('newCat').value; if(url){ galleryImages.push({id:Date.now(),url,category:cat}); localStorage.setItem('gallery',JSON.stringify(galleryImages)); renderGalleryManage(); renderGallery(); } };
+    window.deleteGallery=(id)=>{ galleryImages=galleryImages.filter(g=>g.id!=id); localStorage.setItem('gallery',JSON.stringify(galleryImages)); renderGalleryManage(); renderGallery(); };
+    function renderMessages(){ let html=`<h2 class="text-2xl font-bold">Contact Messages</h2>${contactMessages.map(m=>`<div class="border p-2 my-2 rounded"><strong>${m.name}</strong> (${m.email}): ${m.message}</div>`).join('')}`; document.getElementById('adminContent').innerHTML=html; }
+    function renderSchoolInfoEdit(){ let html=`<h2 class="text-2xl font-bold">School Info</h2><label class="block mt-4">School Name</label><input id="schoolName" value="${schoolInfo.name}" class="border p-2 w-full my-2 rounded"><button onclick="saveSchoolInfo()" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>`; document.getElementById('adminContent').innerHTML=html; }
+    window.saveSchoolInfo=()=>{ schoolInfo.name=document.getElementById('schoolName').value; localStorage.setItem('schoolInfo',JSON.stringify(schoolInfo)); alert('Saved'); };
+    function renderEventsManage(){ let html=`<h2 class="text-2xl font-bold">Manage Events</h2><button onclick="addEvent()" class="bg-green-500 text-white px-4 py-2 my-2 rounded">Add Event</button><ul class="mt-4">${eventsList.map(e=>`<li class="border-b py-2 flex justify-between"><span>${e.title} - ${e.date}</span><button onclick="deleteEvent(${e.id})" class="text-red-600">Delete</button></li>`).join('')}</ul>`; document.getElementById('adminContent').innerHTML=html; }
+    window.addEvent=()=>{ let title=prompt("Title"); let date=prompt("Date YYYY-MM-DD"); if(title){ eventsList.push({id:Date.now(),title,date,description:"New"}); localStorage.setItem('events',JSON.stringify(eventsList)); renderEventsManage(); renderEventsNews(); } };
+    window.deleteEvent=(id)=>{ eventsList=eventsList.filter(e=>e.id!=id); localStorage.setItem('events',JSON.stringify(eventsList)); renderEventsManage(); renderEventsNews(); };
+    
+    // Admin login/logic
+    function showAdminLogin(){ let pwd = prompt("Admin Password ()"); if(pwd === "spjv2004"){ localStorage.setItem('adminLogged','true'); currentAdmin=true; document.getElementById('adminOverlay').classList.remove('hidden'); renderAdminDashboard(); }else alert("Wrong password"); }
+    document.getElementById('adminBtn').onclick = () => currentAdmin ? (document.getElementById('adminOverlay').classList.remove('hidden'), renderAdminDashboard()) : showAdminLogin();
+    document.getElementById('mobileAdminBtn').onclick = () => currentAdmin ? (document.getElementById('adminOverlay').classList.remove('hidden'), renderAdminDashboard()) : showAdminLogin();
+    document.getElementById('adminLogoutBtn').onclick = () => { localStorage.removeItem('adminLogged'); currentAdmin=false; document.getElementById('adminOverlay').classList.add('hidden'); };
+    document.querySelectorAll('.admin-nav').forEach(btn => btn.onclick = (e) => { let sec = e.currentTarget.dataset.adminSection; if(sec==='dashboard') renderAdminDashboard(); else if(sec==='prideManage') renderPrideManage(); else if(sec==='teacherManage') renderTeacherManage(); else if(sec==='galleryManage') renderGalleryManage(); else if(sec==='eventManage') renderEventsManage(); else if(sec==='messages') renderMessages(); else if(sec==='schoolInfo') renderSchoolInfoEdit(); });
+    document.getElementById('closeAdminSidebar').onclick = ()=>{ document.getElementById('adminSidebar').classList.remove('open'); };
+    document.getElementById('mobileAdminMenuBtn').onclick = ()=>{ document.getElementById('adminSidebar').classList.toggle('open'); };
+    // Contact form submit
+    document.getElementById('contactForm').onsubmit = (e)=>{ e.preventDefault(); let msg={ name:document.getElementById('contactName').value, email:document.getElementById('contactEmail').value, subject:document.getElementById('contactSubject').value, message:document.getElementById('contactMsg').value }; contactMessages.push(msg); localStorage.setItem('contactMsgs',JSON.stringify(contactMessages)); alert("Message sent!"); e.target.reset(); };
+    // Dark mode & UI interactions
+    const darkToggle=()=>{ document.body.classList.toggle('dark'); localStorage.setItem('darkMode', document.body.classList.contains('dark')); };
+    document.getElementById('darkModeToggle').onclick = darkToggle;
+    document.getElementById('mobileDarkToggle').onclick = darkToggle;
+    if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+    // Initialize all renders
+    $(document).ready(function(){ $('.hero-slider').slick({dots:true,infinite:true,speed:800,autoplay:true,autoplaySpeed:4000,fade:true}); });
+    let currentYear='all', currentSearch=''; window.pridePage=1;
+    document.querySelectorAll('.pride-filter-btn').forEach(btn=>btn.onclick=function(){ document.querySelectorAll('.pride-filter-btn').forEach(b=>b.classList.remove('active','bg-[#4DA6FF]','text-white')); this.classList.add('active','bg-[#4DA6FF]','text-white'); currentYear=this.dataset.year; renderPride(currentYear,currentSearch); });
+    document.getElementById('prideSearch').oninput = (e)=>{ currentSearch=e.target.value; renderPride(currentYear,currentSearch); };
+    document.querySelectorAll('.teacher-cat-btn').forEach(btn=>btn.onclick=function(){ document.querySelectorAll('.teacher-cat-btn').forEach(b=>b.classList.remove('active','bg-[#4DA6FF]','text-white')); this.classList.add('active','bg-[#4DA6FF]','text-white'); renderTeachers(this.dataset.cat); });
+    document.querySelectorAll('.gallery-filter-btn').forEach(btn=>btn.onclick=function(){ document.querySelectorAll('.gallery-filter-btn').forEach(b=>b.classList.remove('active','bg-[#4DA6FF]')); this.classList.add('active','bg-[#4DA6FF]'); renderGallery(this.dataset.cat); });
+    // counter animation
+    const counters = document.querySelectorAll('.counter');
+    const animateCounters = () => { counters.forEach(c => { let target = +c.dataset.target; let updateCount = () => { let current = +c.innerText; let increment = target/50; if(current < target){ c.innerText = Math.ceil(current + increment); setTimeout(updateCount, 20); } else c.innerText = target; }; updateCount(); }); };
+    window.addEventListener('load', () => { renderPride(); renderTeachers(); renderGallery(); renderEventsNews(); animateCounters(); });
+    // mobile menu toggle
+    document.getElementById('mobileMenuBtn').onclick = ()=> document.getElementById('mobileMenu').classList.toggle('hidden');
+  </script>
+</body>
+</html>
